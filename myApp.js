@@ -1,13 +1,13 @@
 let express = require("express");
 let app = express();
 
-app.get("/", returnHello);
+app.get("/", returnSomething);
 
-function returnHello(req, res) {
+function returnSomething(req, res) {
   //console.log(`running respose ${res} for request ${req}`)
-  //some comment
-  res.send("Hello Express");
+  //res.send("Hello Express");
+  console.log(`sending file from ${__dirname}`);
+  res.sendFile(__dirname + "/views/index.html");
 }
-
 
 module.exports = app;
