@@ -13,6 +13,7 @@ app.use(logCalls);
 app.get("/", returnSomething);
 app.get("/json", returnJson);
 app.get("/now", middleTime, returnTime);
+app.get("/:word/echo", returnEcho);
 
 function returnSomething(req, res) {
   //console.log(`running respose ${res} for request ${req}`)
@@ -46,9 +47,15 @@ function middleTime(req, res, next) {
 
 function returnTime(req, res) {
   const dateObj = {
-    date: req.time,
+    time: req.time,
   };
-  res.json(dateObj);
+  res.send(dateObj);
+}
+
+function returnEcho(req, res) {
+  res.json({
+    echo: req.params.word,
+  });
 }
 
 module.exports = app;
