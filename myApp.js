@@ -6,13 +6,13 @@ require("dotenv").config();
 
 //serving static files
 app.use("/public", express.static(__dirname + "/public"));
+//mounting logger for all calls
+app.use(logCalls);
 
 //main
 app.get("/", returnSomething);
 app.get("/json", returnJson);
-
-//mounting logger for all calls
-app.use("/", logCalls);
+app.get("/now", middleTime, returnTime);
 
 function returnSomething(req, res) {
   //console.log(`running respose ${res} for request ${req}`)
@@ -37,6 +37,18 @@ function returnJson(req, res) {
 function logCalls(req, res, next) {
   console.log("%s %s - %s", req.method, req.path, req.ip);
   next();
+}
+
+function middleTime(req, res, next) {
+  req.time = new Date().toString();
+  next();
+}
+
+function returnTime(req, res) {
+  const dateObj = {
+    date: req.time,
+  };
+  res.json(dateObj);
 }
 
 module.exports = app;
