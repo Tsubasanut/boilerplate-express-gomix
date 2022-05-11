@@ -61,13 +61,12 @@ function returnEcho(req, res) {
 
 function processNamePost(req, res) {
   //loggin incoming query
-  console.log(req.query);
+  console.log("posting query: %s", req.query);
 }
 
 function returnName(req, res) {
-  //
   returnObj = {
-    name: `${req.query.first} ${req.query.second}`,
+    name: `${req.query.first} ${req.query.last}`,
   };
   res.json(returnObj);
 }
