@@ -1,4 +1,5 @@
 let express = require("express");
+let body_parser = require("body-parser");
 let app = express();
 
 //let's connect cuurent env via dotenv module
@@ -8,6 +9,19 @@ require("dotenv").config();
 app.use("/public", express.static(__dirname + "/public"));
 //mounting logger for all calls
 app.use(logCalls);
+/*
+If the data was sent using Content-Type: application/x-www-form-urlencoded,
+you will need to use the express.urlencoded() middleware: 
+
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+*/
+
+//mounting parsing for POST
+app.use(body_parser.urlencoded({ extended: false }));
 
 //main
 app.get("/", returnSomething);
