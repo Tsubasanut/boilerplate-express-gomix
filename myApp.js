@@ -74,8 +74,15 @@ function returnEcho(req, res) {
 }
 
 function processNamePost(req, res) {
-  //loggin incoming query
-  console.log("posting query: %s", req.query);
+  let returnObj = {};
+
+  if (JSON.stringify(req.body) !== JSON.stringify({})) {
+    returnObj.name = `${req.body.first} ${req.body.last}`;
+  } else {
+    returnObj.error = "Cannot parse POST data!";
+  }
+
+  res.json(returnObj);
 }
 
 function returnName(req, res) {
