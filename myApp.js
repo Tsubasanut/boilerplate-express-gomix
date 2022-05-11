@@ -65,6 +65,7 @@ function processNamePost(req, res) {
 }
 
 function returnName(req, res) {
+  //
   returnObj = {
     name: `${req.query.first} ${req.query.second}`,
   };
