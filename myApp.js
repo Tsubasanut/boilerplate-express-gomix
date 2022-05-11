@@ -14,6 +14,7 @@ app.get("/", returnSomething);
 app.get("/json", returnJson);
 app.get("/now", middleTime, returnTime);
 app.get("/:word/echo", returnEcho);
+app.route("/name").get(returnName).post(processNamePost);
 
 function returnSomething(req, res) {
   //console.log(`running respose ${res} for request ${req}`)
@@ -56,6 +57,18 @@ function returnEcho(req, res) {
   res.json({
     echo: req.params.word,
   });
+}
+
+function processNamePost(req, res) {
+  //loggin incoming query
+  console.log(req.query);
+}
+
+function returnName(req, res) {
+  returnObj = {
+    name: `${req.query.first} ${req.query.second}`,
+  };
+  res.json(returnObj);
 }
 
 module.exports = app;
